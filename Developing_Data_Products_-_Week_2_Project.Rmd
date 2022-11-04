@@ -1,0 +1,52 @@
+---
+title: "Developing Data Products"
+subtitle: "Week 2 Project"
+author: "Ezra Taylor"
+date: "11/3/2022"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+```
+
+## Point Nemo Code
+
+Point Nemo is the name given to the location on Earth that is farthest from land. This point is about 2,688 km from the nearest point of land.  
+
+This code generates the point and a link to a page with more information at the US National Oceanic and Atmospheric Administration.  
+
+```{r code, echo=TRUE,cache=TRUE}
+# Coordinates for Point Nemo, with minutes converted to decimals
+library(leaflet)
+library(tidyr)
+library(dplyr)
+lat= -(48+(52.6/60))
+lng= -(123+(23.6/60))
+Point_Nemo <- data.frame(lat,lng)
+url <- "<a href='https://oceanservice.noaa.gov/facts/nemo.html/
+      '>Point Nemo</a>"
+```
+
+## Point Nemo Code 2
+
+This code generates the map.  
+
+```{r code2,echo=TRUE,eval=FALSE}
+Point_Nemo %>% 
+      leaflet() %>% 
+      addTiles() %>% 
+      addMarkers(lat=Point_Nemo$lat, lng = Point_Nemo$lng, 
+                 popup=url)
+```
+
+## Point Nemo Map (11/3/2022)  
+
+Be sure to zoom out.  
+
+```{r map}
+library(leaflet)
+library(tidyr)
+library(dplyr)
+Point_Nemo %>% leaflet() %>% addTiles() %>% addMarkers(lat=Point_Nemo$lat, lng = Point_Nemo$lng, popup=url)
+```
